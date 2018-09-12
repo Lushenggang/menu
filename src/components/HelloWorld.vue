@@ -6,7 +6,7 @@
         <div class="layout-set-title">布局设置</div>
         <div class="layout-set-content">
         <span>菜品宽度：</span>
-        <InputNumber :min="8" v-model="itemWidth"></InputNumber>
+        <InputNumber :min="1" v-model="itemWidth"></InputNumber>
         <span> 每行数量：</span>
         <InputNumber :min="2" v-model="itemNums"></InputNumber>
         <span> 间距:</span>
@@ -26,6 +26,9 @@
         <div class="food-title">
           <div class="label">菜品类名</div>
           <Input v-model="data.title" />
+        </div>
+        <div class="hot">
+          <Checkbox v-model="data.hot">热门</Checkbox>
         </div>
         <div class="food-list">
           <div>菜品列表</div>
@@ -66,7 +69,7 @@
       <div class="logo">
         <div class="logo-image" @click="showSet=!showSet"></div>
         <div class="show-title">{{title}}</div>
-        <div class="show-slogon">欢迎光临</div>
+        <div class="show-header">菜谱</div>
       </div>
       <div class="show-content">
         <div
@@ -76,9 +79,18 @@
             maxWidth: lineWidth + 'rem'
           }"
           :key="idx">
-          <div class="type-title">
-            <Divider orientation="left">{{data.title}}</Divider>
-          </div>
+          <Divider class="divider" orientation="left">
+            <div class="type-title">
+              <span class="title-content">
+                {{data.title}}
+              </span>
+              <Icon
+                class="hot"
+                v-if="data.hot"
+                type="ios-flame">
+              </Icon>
+            </div>
+          </Divider>
           <div class="type-items">
             <div
             v-for="(item, index) of data.menus"
@@ -89,7 +101,8 @@
             }"
             class="type-item">
               <div class="item-title">
-              <Checkbox>{{item.title}}</Checkbox>
+                <div class="checkbox"></div>
+                {{item.title}}
               </div>
               <div class="item-price">
                 ￥{{item.price}}/{{item.unit}}
@@ -97,6 +110,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="footer">
+        欢迎光临<span class="name">{{title}}</span>，祝您用餐愉快！
       </div>
     </div>
   </div>
@@ -107,166 +123,180 @@ export default {
   data () {
     return {
       title: '烤撸台',
-      slogon: '祝您用餐愉快',
       showSet: true,
       itemWidth: 12,
       itemNums: 3,
       itemDistance: 1,
-      menuList: [{
-      title: '招牌菜',
-      menus: [
+      menuList: [
         {
-          title: '竹筒烧肉',
-          price: '35',
-          unit: '筒'
-        },
-        {
-          title: '竹筒米饭',
-          price: '25',
-          unit: '筒',
-        },
-        {
-          title: '爆炒花甲',
-          price: '30',
-          unit: '份'
-        },
-        {
-          title: '啤酒小龙虾(小份)',
-          price: '58',
-          unit: '份'
-        },
-        {
-          title: '啤酒小龙虾(大份)',
-          price: '78',
-          unit: '份'
-        },
-        {
-          title: '海鲜拼盘',
-          price: '58',
-          unit: '份'
-        }]
+          title: '招牌菜',
+          hot: true,
+          menus: [
+            {
+              title: '竹筒米饭',
+              price: '25',
+              unit: '筒',
+            },
+            {
+              title: '竹筒烧肉',
+              price: '35',
+              unit: '筒'
+            },
+            {
+              title: '爆炒花甲',
+              price: '30',
+              unit: '份'
+            },
+            {
+              title: '海鲜拼盘',
+              price: '58',
+              unit: '份'
+            },
+            {
+              title: '啤酒小龙虾(小份)',
+              price: '58',
+              unit: '份'
+            },
+            {
+              title: '啤酒小龙虾(大份)',
+              price: '78',
+              unit: '份'
+            }
+          ]
         },
         {
           title: '私房菜',
-          menus: [{
-            title: '包烧鱼',
-            price: '30',
-            unit: '条'
-          },
-          {
-            title: '包烧茄子',
-            price: '20',
-            unit: '包'
-          },
-          {
-            title: '包烧牛肉',
-            price: '35',
-            unit: '份'
-          },
-          {
-            title: '包烧猪脑',
-            price: '10',
-            unit: '个'
-          }]
+          hot: true,
+          menus: [
+            {
+              title: '包烧猪脑',
+              price: '10',
+              unit: '个'
+            },
+            {
+              title: '包烧茄子',
+              price: '20',
+              unit: '包'
+            },
+            {
+              title: '包烧鱼',
+              price: '30',
+              unit: '条'
+            },
+            {
+              title: '包烧牛肉',
+              price: '35',
+              unit: '份'
+            }
+          ]
         },
         {
           title: '串串',
-          menus: [{
-            title: '鱿鱼',
-            price: '5',
-            unit: '串'
-          },
-          {
-            title: '羊肉串',
-            price: '1.5',
-            unit: '串'
-          },
-          {
-            title: '青豆',
-            price: '1',
-            unit: '串'
-          }]
+          hot: false,
+          menus: [
+            {
+              title: '青豆',
+              price: '1',
+              unit: '串'
+            },
+            {
+              title: '羊肉串',
+              price: '1.5',
+              unit: '串'
+            },
+            {
+              title: '鱿鱼',
+              price: '5',
+              unit: '串'
+            }
+          ]
         },
         {
           title: '肉类',
-          menus: [{
-            title: '鸡翅中',
-            price: '4',
-            unit: '个'
-          },
-          {
-            title: '鸡翅尖',
-            price: '1',
-            unit: '个'
-          },
-          {
-            title: '秘制五花肉',
-            price: '25',
-            unit: '份'
-          },
-          {
-            title: '猪皮',
-            price: '20',
-            unit: '份'
-          },
-          {
-            title: '鸡脚筋',
-            price: '20',
-            unit: '份'
-          },
-          {
-            title: '牛板筋',
-            price: '25',
-            unit: '份'
-          },
-          {
-            title: '秘制牛肉片',
-            price: '35',
-            unit: '份'
-          },
-          {
-            title: '腰花',
-            price: '25',
-            unit: '份'
-          }]
+          hot: false,
+          menus: [
+            {
+              title: '鸡翅尖',
+              price: '1',
+              unit: '个'
+            },
+            {
+              title: '鸡翅中',
+              price: '4',
+              unit: '个'
+            },
+            {
+              title: '鸡脚筋',
+              price: '20',
+              unit: '份'
+            },
+            {
+              title: '猪皮',
+              price: '20',
+              unit: '份'
+            },
+            {
+              title: '腰花',
+              price: '25',
+              unit: '份'
+            },
+            {
+              title: '秘制五花肉',
+              price: '25',
+              unit: '份'
+            },
+            {
+              title: '牛板筋',
+              price: '25',
+              unit: '份'
+            },
+            {
+              title: '秘制牛肉片',
+              price: '35',
+              unit: '份'
+            }
+          ]
         },
         {
           title: '素菜',
-          menus: [{
-            title: '土豆',
-            price: '10',
-            unit: '份'
-          },
-          {
-            title: '小瓜',
-            price: '10',
-            unit: '份'
-          },
-          {
-            title: '韭菜',
-            price: '10',
-            unit: '份'
-          },
-          {
-            title: '人工菌',
-            price: '10',
-            unit: '份'
-          },
-          {
-            title: '香菇',
-            price: '10',
-            unit: '份'
-          },
-          {
-            title: '金针菇',
-            price: '13',
-            unit: '份'
-          },
-          {
-            title: '糯米藕',
-            price: '15',
-            unit: '份'
-          }]
+          hot: false,
+          menus: [
+            {
+              title: '土豆',
+              price: '10',
+              unit: '份'
+            },
+            {
+              title: '小瓜',
+              price: '10',
+              unit: '份'
+            },
+            {
+              title: '韭菜',
+              price: '10',
+              unit: '份'
+            },
+            {
+              title: '人工菌',
+              price: '10',
+              unit: '份'
+            },
+            {
+              title: '香菇',
+              price: '10',
+              unit: '份'
+            },
+            {
+              title: '金针菇',
+              price: '13',
+              unit: '份'
+            },
+            {
+              title: '糯米藕',
+              price: '15',
+              unit: '份'
+            }
+          ]
         }
       ]
     }
@@ -357,6 +387,18 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@font-face
+  font-family 'simple font'
+  src url(/static/font/font2.ttf)
+
+@font-face
+  font-family 'menu font'
+  src url(/static/font/font3.ttf)
+
+@font-face
+  font-family 'logo font'
+  src url(/static/font/font1.ttf)
+
 .menu
   display flex
   position fixed
@@ -399,47 +441,91 @@ export default {
       right 0
       top 0
       bottom 0
-      // background  top right/10rem 10rem no-repeat linear-gradient(45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)), top right/10rem 10rem no-repeat url('./2.jpg')
-      opacity 0.8
+      background top left/100% 100% url(/static/img/background2.jpg)
+      z-index -1
     .logo
+      margin-top 1rem
       padding 1rem
       display flex
       align-items center
       justify-content flex-start
-      padding-left 15%
       width 100%
+      font-family 'logo font'
       .logo-image
-        background top/100% url(./logo.jpg)
+        margin-left 15%
+        background top/100% url('/static/img/logo.jpg')
         width 6rem
         height 6rem
+        border-radius 3rem
       .show-title
-        font-size 1rem
+        font-size 1.5rem
+        color #FF4949
         width 1rem
-      .show-slogon
-        font-size 2rem
+        text-shadow 3px -3px 5px black
+      .show-header
+        font-size 4rem
         position relative
-        left 6rem
+        left 4rem
+        text-shadow 2px 2px 7px white
     .show-content
-      flex auto
       display flex
       flex-direction column
-      font-weight 700
+      color black
       .menu-type
-        box-shadow 0 0 2px 1px #3361D8
-        margin 0.5rem
+        box-shadow 0 0 1px 1px #483b0b, 0 0 3px 1px #6d8416 inset
+        margin 0.5rem 2rem
         border-radius 4px
         padding 0 1rem
         padding-bottom 1rem
-        // background url('./1.jpg')
+        .divider
+          margin 0
+          .type-title
+            display flex
+            align-items center
+            font-size 20px
+            .title-content
+              color #FF3939
+              font-weight 400
+              text-shadow 3px -3px 1px black
+              font-family 'logo font'
+            .hot
+              color #FFB41B
+              padding-bottom 2px
         .type-items
           display flex
           flex-wrap wrap
+          font-weight 500
+          font-size 20px
           .type-item
             display flex
             align-items center
             .item-title
               flex auto
               text-align left
+              display flex
+              align-items center
+              .checkbox
+                border 1px solid #9B9B9B
+                border-radius 2px
+                background #FAFBFC
+                width 20px
+                height 20px
+                display inline-block
+                margin auto 4px
+    .footer
+      margin-top 2rem
+      font-size 1.5rem
+      font-weight 1000
+      text-shadow 2px 2px 1px #C5D9E8
+      font-style italic
+      letter-spacing 2px
+      .name
+        font-family 'logo font'
+        color #FF4949
+        font-weight 500
+        text-shadow 2px 2px 5px black
+        font-size 2rem
+        letter-spacing -2px
 .col, .col-left
   display flex
   align-items center
