@@ -1,5 +1,10 @@
 <template>
-  <div class="menu">
+  <div class="menu" :class="showFront ? '' : 'backmenu'">
+    <div class="choose">
+      <div @click="showSet=!showSet">显示设置</div>
+      <div @click="showFront=!showFront">显示正面</div>
+      <div @click="showBack=!showBack">显示反面</div>
+    </div>
     <div class="set" v-show="showSet">
       <div class="set-title">设置</div>
       <div class="layout-set">
@@ -66,7 +71,7 @@
         </div>
       </div>
     </div>
-    <div class="show">
+    <div class="show" v-show="showFront">
       <div class="bakgroud"></div>
       <div class="logo">
         <div class="logo-image" @click="showSet=!showSet"></div>
@@ -120,6 +125,11 @@
         欢迎光临<span class="name">{{title}}</span>，祝您用餐愉快！
       </div>
     </div>
+    <div class="back" v-show="showBack">
+      <div class="back-content" @dblclick="showFront=!showFront">
+        {{title}}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -129,6 +139,8 @@ export default {
     return {
       title: '烤撸台',
       showSet: true,
+      showFront: true,
+      showBack: true,
       itemWidth: 16,
       itemNums: 2,
       itemDistance: 1,
@@ -414,6 +426,22 @@ export default {
   right 0
   justify-content center
   background top left/100% 100% url(/static/img/background2.jpg)  
+  .choose
+    position absolute
+    background white
+    color black
+    right 0
+    bottom 0
+    padding 1rem
+    opacity 0
+    user-select none
+    &:hover
+      opacity 1
+    div
+      cursor pointer
+      margin 2px
+  &.backmenu
+    background top left/100% 100% url(/static/img/background3.jpg)  
   .set
     width 50%
     min-width 300px
@@ -543,6 +571,16 @@ export default {
         text-shadow 2px 2px 5px black
         font-size 2rem
         letter-spacing -2px
+  .back
+    font-family 'logo font'
+    font-size 8rem
+    color #FF4949
+    text-shadow 6px 6px 15px black
+    display flex
+    align-items center
+    justify-content center
+    .back-content
+      width 8rem
 .col, .col-left
   display flex
   align-items center
