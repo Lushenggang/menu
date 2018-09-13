@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "iview": "^3.1.0",
+    "showdown": "^1.8.6",
     "vue": "^2.5.17"
   },
   "devDependencies": {
@@ -30,7 +31,8 @@
     ],
     "rules": {
       "vue/no-parsing-error": [
-        2, {
+        2,
+        {
           "x-invalid-end-tag": false
         }
       ]

@@ -17,6 +17,8 @@
       <div class="title-set">
         <div class="label">菜单标题：</div>
         <Input v-model="title" />
+        <div class="label">底部文字</div>
+        <Input v-model="footerText" type="textarea"></Input>
       </div>
       <div class="content-set">
         <div class="set-add">
@@ -69,7 +71,7 @@
       <div class="logo">
         <div class="logo-image" @click="showSet=!showSet"></div>
         <div class="show-title">{{title}}</div>
-        <div class="show-header">菜谱</div>
+        <div class="show-header">菜单</div>
       </div>
       <div class="show-content">
         <div
@@ -111,6 +113,9 @@
           </div>
         </div>
       </div>
+      <div class="tips">
+        <div v-html="footerText"></div>
+      </div>
       <div class="footer">
         欢迎光临<span class="name">{{title}}</span>，祝您用餐愉快！
       </div>
@@ -124,8 +129,8 @@ export default {
     return {
       title: '烤撸台',
       showSet: true,
-      itemWidth: 12,
-      itemNums: 3,
+      itemWidth: 16,
+      itemNums: 2,
       itemDistance: 1,
       menuList: [
         {
@@ -217,13 +222,13 @@ export default {
           menus: [
             {
               title: '鸡翅尖',
-              price: '1',
-              unit: '个'
+              price: '15',
+              unit: '份'
             },
             {
               title: '鸡翅中',
-              price: '4',
-              unit: '个'
+              price: '20',
+              unit: '份'
             },
             {
               title: '鸡脚筋',
@@ -298,7 +303,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      footerText: '注：酱料自调，2元/位'
     }
   },
   computed: {
@@ -407,6 +413,7 @@ export default {
   left 0
   right 0
   justify-content center
+  background top left/100% 100% url(/static/img/background2.jpg)  
   .set
     width 50%
     min-width 300px
@@ -434,15 +441,14 @@ export default {
     align-items center
     overflow-y auto
     position relative
-    height auto
+    // background top left/100% 100% url(/static/img/background2.jpg)
     .bakgroud
+      z-index -1
       position absolute
       left 0
       right 0
       top 0
       bottom 0
-      background top left/100% 100% url(/static/img/background2.jpg)
-      z-index -1
     .logo
       margin-top 1rem
       padding 1rem
@@ -471,6 +477,8 @@ export default {
       display flex
       flex-direction column
       color black
+      text-shadow 1px -1px 2px #F7F7F7 
+      flex none
       .menu-type
         box-shadow 0 0 1px 1px #483b0b, 0 0 3px 1px #6d8416 inset
         margin 0.5rem 2rem
@@ -508,12 +516,21 @@ export default {
                 border 1px solid #9B9B9B
                 border-radius 2px
                 background #FAFBFC
-                width 20px
-                height 20px
+                min-width 20px
+                min-height 20px
                 display inline-block
                 margin auto 4px
+    .tips
+      width 100%
+      text-align left
+      div
+        margin 1rem 2rem
+        font-size 20px
+        font-weight 500
+        font-family 'logo font'
+        color black
+        text-shadow 1px -1px 2px #F7F7F7
     .footer
-      margin-top 2rem
       font-size 1.5rem
       font-weight 1000
       text-shadow 2px 2px 1px #C5D9E8
