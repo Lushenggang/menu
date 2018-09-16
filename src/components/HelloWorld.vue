@@ -1,9 +1,14 @@
 <template>
-  <div class="menu" :class="showFront ? '' : 'backmenu'">
+  <div
+    class="menu"
+    :class="{
+      front: showFront && !showSet && !showBack,
+      back: showBack && !showSet && !showFront
+    }">
     <div class="choose">
-      <div @click="showSet=!showSet">显示设置</div>
-      <div @click="showFront=!showFront">显示正面</div>
-      <div @click="showBack=!showBack">显示反面</div>
+      <div @click="showSet=!showSet">{{ showSet ? '隐藏设置' : '显示设置' }}</div>
+      <div @click="showFront=!showFront">{{ showFront ? '隐藏正面' : '显示正面'}}</div>
+      <div @click="showBack=!showBack">{{ showBack ? '隐藏反面' : '显示反面'}}</div>
     </div>
     <div class="set" v-show="showSet">
       <div class="set-title">设置</div>
@@ -140,7 +145,7 @@ export default {
       title: '烤撸台',
       showSet: true,
       showFront: true,
-      showBack: true,
+      showBack: false,
       itemWidth: 16,
       itemNums: 2,
       itemDistance: 1,
@@ -425,23 +430,27 @@ export default {
   left 0
   right 0
   justify-content center
-  background top left/100% 100% url(/static/img/background2.jpg)  
+  &.front
+    background top left/100% 100% url(/static/img/background2.jpg)
+  &.back
+    background top left/100% 100% url(/static/img/background3.jpg)
   .choose
     position absolute
     background white
     color black
-    right 0
-    bottom 0
+    left 0
+    top 0
     padding 1rem
     opacity 0
     user-select none
+    background #F7F7F7
+    box-shadow 0 0 1px 1px #6190E8
+    border-radius 4px
     &:hover
       opacity 1
     div
       cursor pointer
       margin 2px
-  &.backmenu
-    background top left/100% 100% url(/static/img/background3.jpg)  
   .set
     width 50%
     min-width 300px
