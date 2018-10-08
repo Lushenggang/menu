@@ -143,7 +143,7 @@ export default {
   data () {
     return {
       title: '烤撸台',
-      showSet: true,
+      showSet: false,
       showFront: true,
       showBack: false,
       itemWidth: 16,
@@ -228,9 +228,14 @@ export default {
             },
             {
               title: '鱿鱼',
-              price: '5',
-              unit: '串'
+              price: '15',
+              unit: '份'
             },
+            {
+              title: '鲜虾',
+              price: '25',
+              unit: '份'
+            }
           ]
         },
         {
@@ -238,9 +243,9 @@ export default {
           hot: false,
           menus: [
             {
-              title: '羊肉串',
-              price: '1.5',
-              unit: '串'
+              title: '火腿肠',
+              price: '15',
+              unit: '份'
             },
             {
               title: '鸡翅尖',
@@ -253,7 +258,17 @@ export default {
               unit: '份'
             },
             {
+              title: '鸡翘',
+              price: '20',
+              unit: '份'
+            },
+            {
               title: '鸡脚筋',
+              price: '20',
+              unit: '份'
+            },
+            {
+              title: '鸡胗',
               price: '20',
               unit: '份'
             },
@@ -285,9 +300,30 @@ export default {
           ]
         },
         {
+          title: '串串',
+          hot: false,
+          menus: [
+            {
+              title: '羊肉串',
+              price: '1.5',
+              unit: '串'
+            },
+            {
+              title: '骨肉相连',
+              price: '2',
+              unit: '串'
+            }
+          ]
+        },
+        {
           title: '素菜',
           hot: false,
           menus: [
+            {
+              title: '青豆',
+              price: '10',
+              unit: '份'
+            },
             {
               title: '土豆',
               price: '10',
@@ -315,6 +351,11 @@ export default {
             },
             {
               title: '金针菇',
+              price: '13',
+              unit: '份'
+            },
+            {
+              title: '包浆豆腐',
               price: '13',
               unit: '份'
             },
@@ -350,9 +391,30 @@ export default {
               unit: '扎'
             }
           ]
+        },
+        {
+          title: '蘸水',
+          hot: false,
+          menus: [
+            {
+              title: '腌菜膏(腾冲风味)',
+              price: '2',
+              unit: '份'
+            },
+            {
+              title: '蒜香乳腐味',
+              price: '2',
+              unit: '份'
+            },
+            {
+              title: '辣椒粉',
+              price: '2',
+              unit: '份'
+            }
+          ]
         }
       ],
-      footerText: '注：酱料自调，2元/位'
+      footerText: ''
     }
   },
   computed: {
@@ -509,7 +571,6 @@ export default {
     align-items center
     overflow-y auto
     position relative
-    // background top left/100% 100% url(/static/img/background2.jpg)
     .bakgroud
       z-index -1
       position absolute
@@ -518,8 +579,7 @@ export default {
       top 0
       bottom 0
     .logo
-      margin-top 1rem
-      padding 1rem
+      margin 1rem auto
       display flex
       align-items center
       justify-content flex-start
@@ -542,11 +602,12 @@ export default {
         left 4rem
         text-shadow 2px 2px 7px white
     .show-content
+      flex auto
       display flex
       flex-direction column
+      justify-content space-between
       color black
       text-shadow 1px -1px 2px #F7F7F7 
-      flex none
       .menu-type
         box-shadow 0 0 1px 1px #483b0b, 0 0 3px 1px #6d8416 inset
         margin 0.5rem 2rem
@@ -558,7 +619,7 @@ export default {
           .type-title
             display flex
             align-items center
-            font-size 20px
+            font-size 18px
             .title-content
               color #FF3939
               font-weight 400
@@ -571,7 +632,7 @@ export default {
           display flex
           flex-wrap wrap
           font-weight 500
-          font-size 20px
+          font-size 16px
           .type-item
             display flex
             align-items center
@@ -584,8 +645,8 @@ export default {
                 border 1px solid #9B9B9B
                 border-radius 2px
                 background #FAFBFC
-                min-width 20px
-                min-height 20px
+                min-width 16px
+                min-height 16px
                 display inline-block
                 margin auto 4px
     .tips
@@ -605,6 +666,7 @@ export default {
       text-shadow 2px 2px 1px #C5D9E8
       font-style italic
       letter-spacing 2px
+      margin 1rem auto
       .name
         font-family 'logo font'
         color #FF4949
