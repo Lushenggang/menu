@@ -213,30 +213,35 @@ export default {
           ]
         },
         {
-          title: '串串',
+          title: '海鲜类',
           hot: false,
           menus: [
             {
-              title: '青豆',
-              price: '1',
-              unit: '串'
+              title: '扇贝',
+              price: '6',
+              unit: '个'
             },
             {
-              title: '羊肉串',
-              price: '1.5',
-              unit: '串'
+              title: '生蚝',
+              price: '6',
+              unit: '个'
             },
             {
               title: '鱿鱼',
               price: '5',
               unit: '串'
-            }
+            },
           ]
         },
         {
           title: '肉类',
           hot: false,
           menus: [
+            {
+              title: '羊肉串',
+              price: '1.5',
+              unit: '串'
+            },
             {
               title: '鸡翅尖',
               price: '15',
@@ -317,6 +322,32 @@ export default {
               title: '糯米藕',
               price: '15',
               unit: '份'
+            }
+          ]
+        },
+        {
+          title: '酒水',
+          hot: false,
+          menus: [
+            {
+              title: '杨梅泡酒',
+              price: '30',
+              unit: '壶'
+            },
+            {
+              title: '腾冲土锅酒',
+              price: '45',
+              unit: '壶'
+            },
+            {
+              title: '精致红啤(小扎)',
+              price: '50',
+              unit: '扎'
+            },
+            {
+              title: '精致红啤(大扎)',
+              price: '99',
+              unit: '扎'
             }
           ]
         }
@@ -561,13 +592,14 @@ export default {
       width 100%
       text-align left
       div
-        margin 1rem 2rem
+        margin 0 2rem
         font-size 20px
         font-weight 500
         font-family 'logo font'
         color black
         text-shadow 1px -1px 2px #F7F7F7
     .footer
+      margin-bottom 1rem
       font-size 1.5rem
       font-weight 1000
       text-shadow 2px 2px 1px #C5D9E8
