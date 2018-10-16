@@ -2,13 +2,14 @@
   <div
     class="menu"
     :class="{
-      front: showFront && !showSet && !showBack,
-      back: showBack && !showSet && !showFront
+      front: showFront && !showSet && !showBack && !showSign,
+      back: showBack && !showSet && !showFront && !showSign
     }">
     <div class="choose">
       <div @click="showSet=!showSet">{{ showSet ? '隐藏设置' : '显示设置' }}</div>
       <div @click="showFront=!showFront">{{ showFront ? '隐藏正面' : '显示正面'}}</div>
       <div @click="showBack=!showBack">{{ showBack ? '隐藏反面' : '显示反面'}}</div>
+      <div @click="showSign=!showSign">{{ showSign ? '隐藏招牌' : '显示招牌'}}</div>
     </div>
     <div class="set" v-show="showSet">
       <div class="set-title">设置</div>
@@ -135,6 +136,22 @@
         {{title}}
       </div>
     </div>
+    <div class="signboarg-page" v-show="showSign">
+      <div class="large-title">
+        <span>烤</span>
+        <span>撸</span>
+        <span>台</span>
+        <span>操</span>
+        <span>作</span>
+        <span>间</span>
+      </div>
+      <div class="small-title">
+        <span>铁</span>
+        <span>板</span>
+        <span>烧</span>
+        <span>烤</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -144,8 +161,9 @@ export default {
     return {
       title: '烤撸台',
       showSet: false,
-      showFront: true,
+      showFront: false,
       showBack: false,
+      showSign: true,
       itemWidth: 16,
       itemNums: 2,
       itemDistance: 1,
@@ -503,6 +521,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+
 @font-face
   font-family 'simple font'
   src url(/static/font/font2.ttf)
@@ -515,6 +534,10 @@ export default {
   font-family 'logo font'
   src url(/static/font/font1.ttf)
 
+@font-face
+  font-family 'xing kai'
+  src url(/static/font/xingkai.TTF)
+
 .menu
   display flex
   position fixed
@@ -523,6 +546,7 @@ export default {
   left 0
   right 0
   justify-content center
+  align-items center
   &.front
     background top left/100% 100% url(/static/img/background2.jpg)
   &.back
@@ -684,6 +708,31 @@ export default {
     justify-content center
     .back-content
       width 8rem
+  .signboarg-page
+    width 120rem
+    height 16rem
+    border 1px solid red
+    display flex
+    flex-direction column
+    justify-content space-around
+    font-family 'xing kai'
+    .large-title
+      height 10rem
+      font-size 10rem
+      display flex
+      justify-content space-around
+      color #FF2121
+      align-items center
+      padding 0 10rem
+    .small-title
+      display flex
+      align-items center
+      width 30%
+      position relative
+      left 70rem
+      justify-content space-around
+      height 6rem
+      font-size 6rem
 .col, .col-left
   display flex
   align-items center
